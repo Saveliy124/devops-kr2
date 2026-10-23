@@ -1,5 +1,20 @@
-# KR2 template
+# Контрольная работа 2
 
-Counter service on Flask + Redis.
+Кан Савелий Намович, ЭФБО-11-24, номер 14, вариант 2.
+Приложение публикуется как https://notes.devops.local через Nginx.
+Порт приложения 8002 доступен только на 127.0.0.1 сервера.
 
-Local run: `pip install -r requirements.txt && flask --app app run`
+Исходный шаблон: https://gitverse.ru/dgimatdinov/kr2-template, main,
+3ee6c4bfda24df8cb4d61f8a27031813b3238338.
+Логика app.py и requirements.txt сохранены. В app.py допускается только комментарий автора.
+
+## Развёртывание
+
+Сначала выполнить rsync с --dry-run, затем доставку с --exclude=.env --exclude=.git.
+Только на сервере: umask 077; printf 'REDIS_PASSWORD=%s\n' "$(openssl rand -hex 16)" > .env
+Не экспортировать REDIS_PASSWORD в оболочке.
+Затем docker compose up -d --build. Не применять down -v: том содержит данные.
+
+Конфигурация Nginx и инструкция находятся в docs/. Секреты и закрытые ключи
+в репозитории отсутствуют. Пароль исходного шаблона из истории не используется.
+Pull Request оставляется открытым до защиты.
