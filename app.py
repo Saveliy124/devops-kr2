@@ -1,3 +1,4 @@
+# KR2: Kan
 import os
 import socket
 
